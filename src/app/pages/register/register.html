@@ -1,0 +1,88 @@
+<section class="section-lg-t-space section-b-space">
+    <div class="custom-container">
+      <div class="auth-title pt-0 mt-0">
+        <h2>Crear cuenta</h2>
+      </div>
+  
+      <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  
+        <!-- Selector tipo de cuenta (estilo cards/segmented) -->
+        <div class="account-type-switch">
+          <button type="button"
+                  [class.active]="isType('cliente')"
+                  (click)="setType('cliente')">
+            <i class="iconsax" data-icon="user"></i>
+            <span>Cliente</span>
+          </button>
+          <button type="button"
+                  [class.active]="isType('proveedor')"
+                  (click)="setType('proveedor')">
+            <i class="iconsax" data-icon="briefcase"></i>
+            <span>Proveedor</span>
+          </button>
+        </div>
+        <div class="invalid" *ngIf="submitted() && f.type.errors">
+          <small>Selecciona un tipo de cuenta.</small>
+        </div>
+  
+        <!-- Nombre -->
+        <div class="form-group mt-3">
+          <label class="form-label mb-2" for="Inputname">Nombre</label>
+          <div class="form-input">
+            <input type="text" class="form-control" id="Inputname"
+                   placeholder="Tu nombre" formControlName="username" />
+            <i class="iconsax" data-icon="user-2"></i>
+          </div>
+          <div class="invalid" *ngIf="submitted() && f.username.errors">
+            <small *ngIf="f.username.errors['required']">Obligatorio.</small>
+            <small *ngIf="f.username.errors['minlength']">Mínimo 3 caracteres.</small>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label mb-2" for="Inputemail">Email</label>
+          <div class="form-input">
+            <input type="email" class="form-control" id="Inputemail"
+                   placeholder="tu@mail.com" formControlName="email" />
+            <i class="iconsax" data-icon="mail"></i>
+          </div>
+          <div class="invalid" *ngIf="submitted() && f.email.errors">
+            <small *ngIf="f.email.errors['required']">Obligatorio.</small>
+            <small *ngIf="f.email.errors['email']">Formato inválido.</small>
+          </div>
+        </div>
+  
+        <!-- Teléfono -->
+        <div class="form-group">
+          <label class="form-label" for="InputPhone">Teléfono</label>
+          <div class="form-input">
+            <input type="tel" class="form-control" id="InputPhone"
+                   placeholder="+57 300 123 4567" formControlName="phone" />
+            <i class="iconsax" data-icon="call-calling"></i>
+          </div>
+          <div class="invalid" *ngIf="submitted() && f.phone.errors">
+            <small>Ingresa un número válido (puede incluir +, espacios o guiones).</small>
+          </div>
+        </div>
+  
+        <button class="btn theme-btn w-100 auth-btn" type="submit" [disabled]="loading()">
+          <span *ngIf="!loading()">Crear cuenta</span>
+          <span *ngIf="loading()">Creando…</span>
+        </button>
+  
+        <div class="mt-3 text-center" *ngIf="errorMsg()">
+          <small class="text-danger">{{ errorMsg() }}</small>
+        </div>
+        <div class="mt-3 text-center" *ngIf="success()">
+          <small class="text-success">¡Cuenta creada y sesión iniciada!</small>
+        </div>
+  
+        <h6 class="title-color fw-semibold mt-3 text-center">
+          <span class="content-color fw-medium">¿Ya tienes cuenta? </span>
+          <a routerLink="/login" class="theme-color fw-semibold"> Ingresar</a>
+        </h6>
+      </form>
+    </div>
+  </section>
+  

@@ -11,6 +11,13 @@ export const routes: Routes = [
       canonical: '/',
     },
   },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register').then(c => c.Register),
+    title: 'Register | Don Reparador',
+    data: { description: 'Register to get started.' },
+  },
 
   // listado de servicios
   {

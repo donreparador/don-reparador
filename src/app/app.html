@@ -5,7 +5,7 @@
 <!-- loader end -->
 
 <!-- header start -->
-<header class="header">
+<header class="header" *ngIf="!hideHeader" >
   <div class="custom-container">
       <div class="head-content">
           <a href="home.html#sidebar" class="sidebar-btn" data-bs-toggle="offcanvas">
@@ -42,7 +42,7 @@
 <!-- panel-space end -->
 
 <!-- bottom navbar start -->
-<div class="navbar-menu">
+<div class="navbar-menu" *ngIf="!hideHeader">
   <ul>
       <li class="active">
           <a href="home.html">
