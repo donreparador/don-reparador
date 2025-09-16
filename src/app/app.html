@@ -1,0 +1,218 @@
+ <!-- loader start-->
+ <!-- <div class="loader-wrapper" id="loader">
+  <span class="loader"></span>
+</div> -->
+<!-- loader end -->
+
+<!-- header start -->
+<header class="header">
+  <div class="custom-container">
+      <div class="head-content">
+          <a href="home.html#sidebar" class="sidebar-btn" data-bs-toggle="offcanvas">
+              <i class="iconsax" data-icon="text-align-left"></i>
+          </a>
+          <a href="location.html" class="header-location">
+              <div class="location-icon">
+                  <img class="img-fluid location" src="assets/images/svg/location.svg" alt="location">
+              </div>
+              <div class="location-content">
+                  <div class="d-flex align-items-center gap-1">
+                      <h6>Localización actual</h6>
+                      <i class="iconsax d-arrow" data-icon="chevron-down"></i>
+                  </div>
+                  <h5 id="user-location">Cargando...</h5>
+              </div>
+          </a>
+          <div class="d-flex align-items-center gap-2">
+              <a href="search.html">
+                  <i class="iconsax icon-btn" data-icon="search-normal-2"></i>
+              </a>
+              <a href="notification.html">
+                  <i class="iconsax icon-btn notification-icon" data-icon="bell-2"></i>
+              </a>
+          </div>
+      </div>
+  </div>
+</header>
+<!-- header end -->
+<router-outlet></router-outlet>
+
+<!-- panel-space start -->
+<div class="panel-space"></div>
+<!-- panel-space end -->
+
+<!-- bottom navbar start -->
+<div class="navbar-menu">
+  <ul>
+      <li class="active">
+          <a href="home.html">
+              <div class="icon">
+                  <img class="unactive" src="assets/images/svg/home.svg" alt="home">
+                  <img class="active" src="assets/images/svg/home-fill.svg" alt="home">
+              </div>
+              <h5 class="active">Home</h5>
+          </a>
+      </li>
+
+      <li>
+          <a href="booking.html">
+              <div class="icon">
+                  <img class="unactive" src="assets/images/svg/booking.svg" alt="booking">
+                  <img class="active" src="assets/images/svg/booking-fill.svg" alt="booking">
+              </div>
+              <h5>Booking</h5>
+          </a>
+      </li>
+
+      <li>
+          <a href="cart.html" class="scanner-btn">
+              <div class="icon">
+                  <i class="iconsax icon-btn" data-icon="shopping-cart"></i>
+              </div>
+          </a>
+      </li>
+
+      <li>
+          <a href="offer.html">
+              <div class="icon">
+                  <img class="unactive" src="assets/images/svg/offer.svg" alt="offer">
+                  <img class="active" src="assets/images/svg/offer-fill.svg" alt="offer">
+              </div>
+              <h5>Offer</h5>
+          </a>
+      </li>
+
+      <li>
+          <a href="profile.html">
+              <div class="icon">
+                  <img class="unactive" src="assets/images/svg/profile.svg" alt="profile">
+                  <img class="active" src="assets/images/svg/profile-fill.svg" alt="profile">
+              </div>
+              <h5>Profile</h5>
+          </a>
+      </li>
+  </ul>
+</div>
+<!-- bottom navbar end -->
+
+<!-- sidebar starts -->
+<div class="offcanvas sidebar-offcanvas offcanvas-start" tabindex="-1" id="sidebar">
+  <div class="offcanvas-header sidebar-header">
+      <div class="sidebar-logo">
+          <img class="img-fluid logo" src="assets/images/logo/logo.png" alt="logo">
+          <img class="img-fluid logo-dark" src="assets/images/logo/logo-white.png" alt="logo">
+      </div>
+  </div>
+  <div class="offcanvas-body">
+      <div class="profile-background">
+          <div class="profile-part p-0">
+              <div class="profile-image">
+                  <img id="output" class="img-fluid profile-pic" src="assets/images/profile/p11.png"
+                      alt="11">
+              </div>
+
+              <h3>Smitha Williams</h3>
+              <h4>smithwilliams452@gmail.com</h4>
+          </div>
+      </div>
+
+
+      <ul class="profile-list">
+          <li>
+              <a href="index.html" class="setting-box">
+                  <div class="setting-icon">
+                      <i class="iconsax main-icon" data-icon="user-2"> </i>
+                  </div>
+                  <div class="setting-content">
+                      <h5>User App</h5>
+                      <i class="iconsax arrow" data-icon="chevron-right"></i>
+                  </div>
+              </a>
+          </li>
+          <li>
+              <a href="https://themes.pixelstrap.com/pwa/fixit/template/provider-app/index.html" class="setting-box">
+                  <div class="setting-icon">
+                      <img class="img-fluid main-icon main-img" src="assets/images/svg/provider-app.svg"
+                          alt="provider-app">
+                  </div>
+                  <div class="setting-content">
+                      <h5>Provider App</h5>
+                      <i class="iconsax arrow" data-icon="chevron-right"></i>
+                  </div>
+              </a>
+          </li>
+          <li>
+              <a href="https://themes.pixelstrap.com/pwa/fixit/template/servicemen-app/index.html" class="setting-box">
+                  <div class="setting-icon">
+                      <img class="img-fluid main-icon main-img" src="assets/images/svg/servicemen-app.svg"
+                          alt="servicemen-app">
+                  </div>
+                  <div class="setting-content">
+                      <h5>Servicemen App</h5>
+                      <i class="iconsax arrow" data-icon="chevron-right"></i>
+                  </div>
+              </a>
+          </li>
+
+          <li>
+              <a href="page-listing.html" class="setting-box">
+                  <div class="setting-icon">
+                      <i class="iconsax main-icon" data-icon="book-closed"> </i>
+                  </div>
+                  <div class="setting-content">
+                      <h5>Template Pages</h5>
+                      <i class="iconsax arrow" data-icon="chevron-right"></i>
+                  </div>
+              </a>
+          </li>
+
+          <li>
+              <a href="https://themes.pixelstrap.com/pwa/fixit/template/elements/elements-page.html" class="setting-box">
+                  <div class="setting-icon">
+                      <i class="iconsax main-icon" data-icon="document-text-1"> </i>
+                  </div>
+                  <div class="setting-content">
+                      <h5> Template Elements</h5>
+                      <i class="iconsax arrow" data-icon="chevron-right"></i>
+                  </div>
+              </a>
+          </li>
+
+          <li>
+              <div class="setting-box">
+                  <div class="setting-icon">
+                      <i class="iconsax main-icon" data-icon="repeat"> </i>
+                  </div>
+                  <div class="setting-content">
+                      <h5>RTL</h5>
+                      <div class="switch-btn">
+                          <input id="dir-switch" type="checkbox">
+                      </div>
+                  </div>
+              </div>
+          </li>
+
+          <li>
+              <div class="setting-box">
+                  <div class="setting-icon">
+                      <i class="iconsax main-icon" data-icon="brush-3"> </i>
+                  </div>
+                  <div class="setting-content">
+                      <h5>Dark</h5>
+                      <div class="switch-btn">
+                          <input id="dark-switch" type="checkbox">
+                      </div>
+                  </div>
+              </div>
+          </li>
+      </ul>
+
+      <div class="bottom-sidebar">
+          <a href="login.html" class="pages">
+              <i class="iconsax sidebar-icon" data-icon="logout-2"> </i>
+              <h3>Logout</h3>
+          </a>
+      </div>
+  </div>
+</div>
+<!-- sidebar end -->
