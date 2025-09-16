@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthPocketbaseService, RegisterMinimalPayload, UserType } from '../../services/auth-pocketbase.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 export class Register {
   private fb = inject(FormBuilder);
   private auth = inject(AuthPocketbaseService);
+  private router = inject(Router);
 
   loading = signal(false);
   submitted = signal(false);
@@ -26,6 +28,7 @@ export class Register {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [
       Validators.required,
+      // E.164 o dígitos con espacios/guiones
       /^\+?\d[\d\s-]{6,19}\d$/.test.bind(/^\+?\d[\d\s-]{6,19}\d$/) as any
     ]],
   });
@@ -49,23 +52,28 @@ export class Register {
 
       this.success.set(true);
 
-      // 👉 Aquí lanzamos el SweetAlert
-      Swal.fire({
-        title: '¡Cuenta creada!',
-        text: `Bienvenido ${v.username}, tu cuenta de ${v.type} fue creada correctamente.`,
-        icon: 'success',
-        confirmButtonText: 'Continuar'
-      });
-
-      // Ejemplo: redirigir según tipo
-      // if (v.type === 'proveedor') this.router.navigate(['/proveedor/onboarding']);
-      // else this.router.navigate(['/cliente/home']);
+      if (v.type === 'cliente') {
+        // Cliente: cuenta activa y sesión iniciada en el servicio → navegar a /home
+        Swal.fire({
+          title: '¡Cuenta creada!',
+          text: `Bienvenido ${v.username}, tu cuenta de cliente fue activada correctamente.`,
+          icon: 'success',
+          confirmButtonText: 'Ir al inicio'
+        }).then(() => this.router.navigate(['/home']));
+      } else {
+        // Proveedor: queda "pending" hasta revisión del admin (no login)
+        Swal.fire({
+          title: 'Cuenta en revisión',
+          text: `Gracias ${v.username}. Tu cuenta de proveedor será revisada por el equipo antes de activarse.`,
+          icon: 'info',
+          confirmButtonText: 'Entendido'
+        });
+      }
 
     } catch (e: any) {
       const msg = e?.response?.message ?? e?.message ?? 'No se pudo crear la cuenta.';
       this.errorMsg.set(msg);
 
-      // También puedes mostrar error con SweetAlert
       Swal.fire({
         title: 'Error',
         text: msg,
@@ -78,6 +86,7 @@ export class Register {
     }
   }
 
+  // Selector visual de tipo
   setType(t: UserType) { this.form.get('type')?.setValue(t); }
   isType(t: UserType)  { return this.form.get('type')?.value === t; }
 }

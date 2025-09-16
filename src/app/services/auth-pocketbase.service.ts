@@ -5,10 +5,10 @@ import PocketBase, { RecordModel } from 'pocketbase';
 export type UserType = 'cliente' | 'proveedor';
 
 export interface RegisterMinimalPayload {
-  username: string;  // lo usas como "nombre" visible
+  username: string;   // nombre visible
   email: string;
   phone: string;
-  type: UserType;    // cliente | proveedor
+  type: UserType;     // 'cliente' | 'proveedor'
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,32 +26,46 @@ export class AuthPocketbaseService {
     return Array.from(bytes, b => chars[b % chars.length]).join('');
   }
 
-  async registerMinimal(payload: RegisterMinimalPayload): Promise<RecordModel> {
+// src/app/services/auth-pocketbase.service.ts
+async registerMinimal(payload: RegisterMinimalPayload): Promise<RecordModel> {
     const password = this.randomPassword();
-
-    const displayName = payload.username?.trim();   // <- name visible
-    const roleValue   = payload.type;               // <- mismo valor para role y type
-
+  
+    // Mapear UI → schema PB
+    const rolwMap: Record<UserType, 'client' | 'provider'> = {
+      cliente: 'client',
+      proveedor: 'provider',
+    };
+    const rolwValue = rolwMap[payload.type];
+  
+    // ✅ status booleano según el tipo
+    const isActive = payload.type === 'cliente';
+  
     const record = await this.pb.collection('users').create({
-      // Auth/required
+      // auth
       email: payload.email,
       emailVisibility: true,
       password,
       passwordConfirm: password,
-
-      // Tu schema
-      username: payload.username,   // si usas username como slug/alias
-      name: displayName,            // ✅ llena "name"
+  
+      // datos
+      username: payload.username,
+      name: payload.username,
       phone: payload.phone,
-      type: roleValue,              // ✅ si existe campo "type"
-      role: roleValue,              // ✅ si existe campo "role" (o "rolw" si así se llama)
-      // avatar: ... (si luego lo subes)
+  
+      // roles/categorización
+      type: payload.type,   // 'cliente' | 'proveedor' (tu etiquetado)
+      rolw: rolwValue,      // 'client' | 'provider'
+      status: isActive,     // 👈 cliente=true, proveedor=false
     });
-
-    await this.pb.collection('users').authWithPassword(payload.email, password);
-
+  
+    // Autologin solo si es cliente (activo)
+    if (isActive) {
+      await this.pb.collection('users').authWithPassword(payload.email, password);
+    }
+  
+    // (Opcional) crear perfil
     try {
-      const userId = this.pb.authStore.model?.id;
+      const userId = this.pb.authStore.model?.id ?? record.id;
       if (userId) {
         if (payload.type === 'proveedor') {
           await this.pb.collection('proveedores').create({ user: userId, estado: 'incompleto' });
@@ -60,9 +74,10 @@ export class AuthPocketbaseService {
         }
       }
     } catch (e) {
-      console.warn('No se pudo crear el perfil por tipo:', e);
+      console.warn('Perfil post-registro no creado:', e);
     }
-
+  
     return record;
   }
+  
 }
