@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthPocketbaseService, RegisterMinimalPayload, UserType } from '../../services/auth-pocketbase.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+import { EmailService } from '../../services/email.service'; // <---
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -16,6 +16,7 @@ export class Register {
   private fb = inject(FormBuilder);
   private auth = inject(AuthPocketbaseService);
   private router = inject(Router);
+  private email = inject(EmailService); // <---
 
   loading = signal(false);
   submitted = signal(false);
@@ -43,6 +44,7 @@ export class Register {
     this.loading.set(true);
     try {
       const v = this.form.value as Required<RegisterMinimalPayload>;
+
       await this.auth.registerMinimal({
         username: v.username,
         email: v.email,
@@ -51,9 +53,40 @@ export class Register {
       });
 
       this.success.set(true);
+// justo después de registerMinimal:
+const createdAt = new Date().toISOString();
+
+try {
+  if (v.type === 'cliente') {
+    await this.email.sendBienvenidaCliente(v.email, v.username, {
+      name: v.username,
+      email: v.email,
+      type: v.type,
+      phone: v.phone,
+      created: createdAt
+    });
+  } else {
+    await this.email.sendBienvenidaProveedor(v.email, v.username, {
+      name: v.username,
+      email: v.email,
+      type: v.type,
+      phone: v.phone,
+      created: createdAt
+    });
+    await this.email.notifyAdminNuevoProveedor({
+      name: v.username,
+      email: v.email,
+      type: v.type,
+      created: createdAt,
+      phone: v.phone
+    });
+  }
+} catch (mailErr: any) {
+  console.error('Fallo envío de email:', mailErr?.message || mailErr);
+}
+
 
       if (v.type === 'cliente') {
-        // Cliente: cuenta activa y sesión iniciada en el servicio → navegar a /home
         Swal.fire({
           title: '¡Cuenta creada!',
           text: `Bienvenido ${v.username}, tu cuenta de cliente fue activada correctamente.`,
@@ -61,7 +94,6 @@ export class Register {
           confirmButtonText: 'Ir al inicio'
         }).then(() => this.router.navigate(['/home']));
       } else {
-        // Proveedor: queda "pending" hasta revisión del admin (no login)
         Swal.fire({
           title: 'Cuenta en revisión',
           text: `Gracias ${v.username}. Tu cuenta de proveedor será revisada por el equipo antes de activarse.`,
@@ -73,18 +105,12 @@ export class Register {
     } catch (e: any) {
       const msg = e?.response?.message ?? e?.message ?? 'No se pudo crear la cuenta.';
       this.errorMsg.set(msg);
-
-      Swal.fire({
-        title: 'Error',
-        text: msg,
-        icon: 'error',
-        confirmButtonText: 'Revisar'
-      });
-
+      Swal.fire({ title: 'Error', text: msg, icon: 'error', confirmButtonText: 'Revisar' });
     } finally {
       this.loading.set(false);
     }
   }
+
 
   // Selector visual de tipo
   setType(t: UserType) { this.form.get('type')?.setValue(t); }
