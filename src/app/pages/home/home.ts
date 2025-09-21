@@ -16,7 +16,8 @@ import { SeoService } from '../../services/seo.service';
   imports: [CommonModule, 
     BannerCarousel, 
     TopCategories, 
-    TopProviders],
+    // TopProviders
+  ],
   templateUrl:   './home.html',
   // styleUrls: ['./home.component.scss'] 
 })    

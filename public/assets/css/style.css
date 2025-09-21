@@ -55,7 +55,7 @@
 /* font family */
 /* color variables */
 :root {
-  --theme-color: 195, 171, 7; /* #3e6298 */
+  --theme-color: 47,90,158; /* #3e6298 */
   --title-color: 0, 22, 46;
   --content-color: 153, 153, 153;
   --box-bg: 246, 246, 246;
@@ -68,7 +68,7 @@
   --black: 0, 0, 0; }
 
 .dark {
-  --theme-color: 195, 171, 7; /* #3e6298 */
+  --theme-color: 47,90,158; /* #3e6298 */
   --title-color: 255, 255, 255;
   --content-color: 200, 205, 210;
   --white: 24, 36, 56; /* Dark blue background */
@@ -467,7 +467,7 @@ li {
               content: "";
               top: 0;
               height: 32px;
-              background: rgba(195, 171, 7, 0.1); }
+              background: rgba(47,90,158, 0.1); }
             .mbsc-datepicker .mbsc-datepicker-tab-wrapper .mbsc-datepicker-tab .mbsc-calendar .mbsc-calendar-wrapper .mbsc-calendar-body .mbsc-calendar-slide .mbsc-calendar-table .mbsc-calendar-row .mbsc-calendar-cell .mbsc-calendar-cell-inner .mbsc-calendar-cell-text {
               margin: 0;
               color: rgba(var(--title-color), 1); }
@@ -3014,7 +3014,7 @@ li {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba(var(--theme-color), 0.1);
+        background-color: #3F51B5;
         border-radius: 100%; }
         @media (max-width: 600px) {
           .header .head-content .header-location .location-icon {
