@@ -15,9 +15,9 @@ export class EmailService {
   private http = inject(HttpClient);
   private base = environment.brevoApiBaseUrl; // ej. https://api.midominio.com:5542
 
-  private TEMPLATE_CLIENTE   = 9;
-  private TEMPLATE_PROVEEDOR = 4;
-  private TEMPLATE_ADMIN     = 10;
+  private TEMPLATE_CLIENTE   = 1;
+  private TEMPLATE_PROVEEDOR = 2;
+  private TEMPLATE_ADMIN     = 3;
 
   private post<T>(path: string, body: any) {
     return this.http.post<T>(`${this.base}${path}`, body).pipe(
@@ -31,12 +31,12 @@ export class EmailService {
 
   async sendBienvenidaCliente(toEmail: string, toName: string, params?: Record<string, any>) {
     const body: BrevoBody = { toEmail, toName, templateId: this.TEMPLATE_CLIENTE, params };
-    await firstValueFrom(this.post(`/BienvenidaSolicitante`, body));
+    await firstValueFrom(this.post(`/bienvenidacliente`, body));
   }
 
   async sendBienvenidaProveedor(toEmail: string, toName: string, params?: Record<string, any>) {
     const body: BrevoBody = { toEmail, toName, templateId: this.TEMPLATE_PROVEEDOR, params };
-    await firstValueFrom(this.post(`/BienvenidaProveedor`, body));
+    await firstValueFrom(this.post(`/bienvenidaexperto`, body));
   }
 
   async notifyAdminNuevoProveedor(params: { 
@@ -47,11 +47,11 @@ export class EmailService {
     phone?: string;
   }) {
     const body = {
-      toEmail: 'donreparador@proton.me',
+      toEmail: 'donreparador.com@gmail.com',
       toName: 'Equipo',
       templateId: this.TEMPLATE_ADMIN,
       params
     };
-    await firstValueFrom(this.post(`/BienvenidaAdminDonReparador`, body));
+    await firstValueFrom(this.post(`/nuevoregistroadministrador`, body));
   }
 }
