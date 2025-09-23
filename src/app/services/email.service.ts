@@ -13,7 +13,7 @@ interface BrevoBody {
 @Injectable({ providedIn: 'root' })
 export class EmailService {
   private http = inject(HttpClient);
-  private base = environment.brevoApiBaseUrl; // ej. https://api.midominio.com:5542
+  private base = environment.brevoApiBaseUrl; 
 
   private TEMPLATE_CLIENTE   = 1;
   private TEMPLATE_PROVEEDOR = 2;
