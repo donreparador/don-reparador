@@ -9,6 +9,8 @@ import { BannerItem } from '../../interfaces/banner.interface';
 import { Category } from '../../interfaces/category.interface';
 import { Provider } from '../../interfaces/provider.interface';
 import { SeoService } from '../../services/seo.service';
+import { FeaturedServices } from './sections/featured-services/featured-services';
+import { Packages } from './sections/packages/packages';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,8 @@ import { SeoService } from '../../services/seo.service';
   imports: [CommonModule, 
     BannerCarousel, 
     TopCategories, 
+    FeaturedServices,
+    Packages,
     // TopProviders
   ],
   templateUrl:   './home.html',

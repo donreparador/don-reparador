@@ -1,0 +1,43 @@
+<!-- header start -->
+<header class="header" [hidden]="hideHeader || router.url === '/login'" >
+    <div class="custom-container">
+        <div class="head-content">
+            <a href="home.html#sidebar" class="sidebar-btn" data-bs-toggle="offcanvas">
+                <i class="iconsax" data-icon="text-align-left"></i>
+            </a>
+            <a href="location.html" class="header-location">
+                <div class="location-icon">
+                    <img class="img-fluid location" src="assets/images/svg/location.svg" alt="location">
+                </div>
+                <div class="location-content">
+                    <div class="d-flex align-items-center gap-1">
+                        <h6>Localización actual</h6>
+                        <i class="iconsax d-arrow" data-icon="chevron-down"></i>
+                    </div>
+                    <h5 id="user-location">Cargando...</h5>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a href="search.html">
+                    <i class="iconsax icon-btn" data-icon="search-normal-2"></i>
+                </a>
+                <a href="notification.html">
+                    <i class="iconsax icon-btn notification-icon" data-icon="bell-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+  </header>
+  <header class="auth-header" [hidden]="router.url !== '/login'">
+      <div class="custom-container">
+          <div class="header-panel pb-3">
+              <a onclick="history.back();">
+                  <i class="iconsax icon-btn" data-icon="chevron-left"> </i>
+              </a>
+  
+              <img class="img-fluid logo" src="assets/images/logo/logo.png" alt="logo">
+              <img class="img-fluid logo-dark" src="assets/images/logo/logo-white.png" alt="logo">
+          </div>
+      </div>
+  </header>
+  <!-- header end -->
