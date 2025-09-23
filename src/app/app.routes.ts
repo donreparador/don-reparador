@@ -18,8 +18,22 @@ export const routes: Routes = [
     title: 'Register | Don Reparador',
     data: { description: 'Register to get started.' },
   },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login').then(c => c.Login),
+    title: 'Login | Don Reparador',
+    data: { description: 'Login to get started.' },
+  },
 
   // listado de servicios
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./pages/profile/profile').then(c => c.Profile),
+    title: 'Profile | Don Reparador',
+    data: { description: 'Profile to get started.' },
+  },
   {
     path: 'servicios',
     loadComponent: () =>

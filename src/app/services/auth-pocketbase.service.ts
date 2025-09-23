@@ -16,7 +16,7 @@ export class AuthPocketbaseService {
   public pb: PocketBase;
 
   constructor() {
-    this.pb = new PocketBase('https://db.buckapi.com:8090');
+    this.pb = new PocketBase('https://db.donreparador.com:8090');
   }
 
   private randomPassword(len = 18): string {
