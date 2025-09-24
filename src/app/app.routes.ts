@@ -35,6 +35,13 @@ export const routes: Routes = [
     data: { description: 'Profile to get started.' },
   },
   {
+    path: 'notifications',
+    loadComponent: () =>
+      import('./pages/notifications/notifications').then(c => c.Notifications),
+    title: 'Notifications | Don Reparador',
+    data: { description: 'Notifications to get started.' },
+  },
+  {
     path: 'servicios',
     loadComponent: () =>
       import('./pages/services/services').then(c => c.Services),

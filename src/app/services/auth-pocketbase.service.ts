@@ -5,10 +5,12 @@ import PocketBase, { RecordModel } from 'pocketbase';
 export type UserType = 'cliente' | 'proveedor';
 
 export interface RegisterMinimalPayload {
-  username: string;   // nombre visible
+  username: string;
   email: string;
   phone: string;
-  type: UserType;     // 'cliente' | 'proveedor'
+  type: UserType;
+  dni?: string;
+  avatar?: string | Blob;              // File extiende de Blob
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,44 +28,51 @@ export class AuthPocketbaseService {
     return Array.from(bytes, b => chars[b % chars.length]).join('');
   }
 
-// src/app/services/auth-pocketbase.service.ts
-async registerMinimal(payload: RegisterMinimalPayload): Promise<RecordModel> {
+  isLoggedIn(): boolean {
+    return this.pb.authStore.isValid && !!this.pb.authStore.model;
+  }
+
+  currentUser(): RecordModel | null {
+    return this.pb.authStore.model;
+  }
+
+  fileUrl(record: RecordModel | null | undefined, fileName?: string, thumb?: string): string | null {
+    if (!record || !fileName) return null;
+    return this.pb.files.getUrl(record, fileName, thumb ? { thumb } : undefined);
+  }
+
+  async registerMinimal(payload: RegisterMinimalPayload): Promise<RecordModel> {
     const password = this.randomPassword();
-  
-    // Mapear UI → schema PB
+
     const rolwMap: Record<UserType, 'client' | 'provider'> = {
       cliente: 'client',
       proveedor: 'provider',
     };
     const rolwValue = rolwMap[payload.type];
-  
-    // ✅ status booleano según el tipo
     const isActive = payload.type === 'cliente';
-  
-    const record = await this.pb.collection('users').create({
-      // auth
+
+    const data: Record<string, any> = {
       email: payload.email,
       emailVisibility: true,
       password,
       passwordConfirm: password,
-  
-      // datos
       username: payload.username,
       name: payload.username,
       phone: payload.phone,
-  
-      // roles/categorización
-      type: payload.type,   // 'cliente' | 'proveedor' (tu etiquetado)
-      rolw: rolwValue,      // 'client' | 'provider'
-      status: isActive,     // 👈 cliente=true, proveedor=false
-    });
-  
-    // Autologin solo si es cliente (activo)
+      dni: payload.dni ?? '',
+      type: payload.type,
+      rolw: rolwValue,
+      status: isActive,
+    };
+
+    if (payload.avatar instanceof Blob) data['avatar'] = payload.avatar;
+
+    const record = await this.pb.collection('users').create(data);
+
     if (isActive) {
       await this.pb.collection('users').authWithPassword(payload.email, password);
     }
-  
-    // (Opcional) crear perfil
+
     try {
       const userId = this.pb.authStore.model?.id ?? record.id;
       if (userId) {
@@ -76,8 +85,20 @@ async registerMinimal(payload: RegisterMinimalPayload): Promise<RecordModel> {
     } catch (e) {
       console.warn('Perfil post-registro no creado:', e);
     }
-  
+
     return record;
   }
-  
+
+  async login(email: string, password: string) {
+    const res = await this.pb.collection('users').authWithPassword(email, password);
+    return res.record;
+  }
+
+  async requestPasswordReset(email: string) {
+    await this.pb.collection('users').requestPasswordReset(email);
+  }
+
+  logout() {
+    this.pb.authStore.clear();
+  }
 }

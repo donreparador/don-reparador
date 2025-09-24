@@ -4,7 +4,9 @@ import { Router, RouterOutlet } from '@angular/router';
 import { BottomNavbar } from './components/bottom-navbar/bottom-navbar';
 import { Header } from './components/header/header';
 import { Sidebar } from './components/sidebar/sidebar';
-
+import { filter } from 'rxjs/operators';
+import { NavigationEnd } from '@angular/router';
+declare const iconsax: any;
 @Component({
   selector: 'app-root',
   imports: [
@@ -28,6 +30,12 @@ export class App implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Add any view initialization logic here if needed
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    ).subscribe(() => {
+      setTimeout(() => {
+        if (typeof iconsax?.replace === 'function') iconsax.replace();
+      });
+    });
   }
 }

@@ -1,173 +1,53 @@
-    <!-- profile section starts -->
-    <section class="section-b-space section-lg-t-space">
-        <div class="custom-container">
-            <div class="profile-background">
-                <img class="img-fluid profile-bg" src="assets/images/background/profile-bg.png" alt="profile-bg">
-                <div class="profile-part mt-3">
-                    <div class="profile-image">
-                        <img id="output" class="img-fluid profile-pic" src="assets/images/profile/profile.png"
-                            alt="11">
-                        <i class="iconsax edit-icon" data-icon="edit-2"></i>
-                        <input id="file" type="file" onchange="loadFile(event)">
-                    </div>
+<!-- profile section starts -->
+<section class="section-b-space section-lg-t-space" *ngIf="isLoggedIn">
+  <div class="custom-container">
+    <!-- Header del perfil -->
+    <div class="profile-background">
+      <img class="img-fluid profile-bg" src="assets/images/background/profile-bg.png" alt="profile-bg" />
 
-                    <h3>Smitha Williams</h3>
-                    <h4>smithwilliams452@gmail.com</h4>
-                </div>
-                <div class="balance-background mt-3">
-                    <a href="wallet.html" class="balance-details">
-                        <h5 class="fw-medium">Available Balance :</h5>
-                        <div class="d-flex align-items-center gap-1">
-                            <h4>$152.30</h4>
-                            <i class=" iconsax arrow-icon" data-icon="arrow-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="profile-list">
-                <h5 class="inner-sub-title theme-color text-capitalize mb-2">General</h5>
-                <ul class="setting-listing">
-                    <li class="w-100">
-                        <a href="profile-setting.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="user-2"> </i>
-                            </div>
-
-                            <div class="setting-content">
-                                <h5>Profile Setting</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="favorite-list.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="heart"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>Favourite List</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="my-location.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="location"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>Manage Locations</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="my-review.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="receipt-discount-2"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>My Review</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="profile-list">
-                <h5 class="inner-sub-title theme-color text-capitalize mb-2">App details</h5>
-                <ul class="setting-listing">
-                    <li class="w-100">
-                        <a href="app-setting.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="password-check"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>App Setting </h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="profile.html#share" class="setting-box" data-bs-toggle="modal">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="send-2"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>Share App</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="help.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="24hr-service"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>Help & Support</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="contact-us.html" class="setting-box">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="phone"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5>Contact Us</h5>
-                                <i class="iconsax icon" data-icon="chevron-right"> </i>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <a href="https://themes.pixelstrap.com/pwa/fixit/template/provider-app/index.html" class="provider-banner-part">
-                <div class="provider-img">
-                    <img class="img-fluid provider-icon" src="assets/images/svg/provider-vector-img.svg" alt="">
-                </div>
-                <div class="provider-content">
-                    <h4 class="theme-color fw-medium">Become a provider</h4>
-                    <i class="iconsax icon" data-icon="chevron-right"> </i>
-                </div>
-            </a>
-
-            <div class="profile-list">
-                <h5 class="inner-sub-title error-color text-capitalize mb-2">Alert zone</h5>
-                <ul class="setting-listing alert-list">
-                    <li class="w-100">
-                        <a href="profile.html#delete" class="setting-box" data-bs-toggle="modal">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="user-2-remove"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5 class="error-color">Delete Account</h5>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="w-100">
-                        <a href="profile.html#logout" class="setting-box" data-bs-toggle="modal">
-                            <div class="setting-icon">
-                                <i class="iconsax icon" data-icon="logout-2"> </i>
-                            </div>
-                            <div class="setting-content">
-                                <h5 class="error-color">Logout</h5>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+      <div class="profile-part mt-3">
+        <div class="profile-image">
+          <img class="img-fluid profile-pic" [src]="avatarSrc()" alt="profile" />
+          <span class="material-symbols-rounded edit-icon">edit</span>
+          <!-- Si luego implementas subir avatar, cambia a (change)="onFileSelected($event)" -->
+          <input id="file" type="file" />
         </div>
-    </section>
-    <!-- profile section end -->
+
+        <!-- Switch de roles solo para proveedor -->
+        <!-- <div *ngIf="user?.type === 'proveedor'" class="role-switch mt-2">
+          <span class="role-label" [class.active]="role === 'client'">Cliente</span>
+          <input
+            id="roleSwitch"
+            type="checkbox"
+            class="sr-only"
+            [checked]="role === 'provider'"
+            (change)="onRoleToggle($event)"
+            role="switch"
+            aria-label="Cambiar entre Cliente y Prestador"
+          />
+          <label for="roleSwitch" class="switch"></label>
+          <span class="role-label" [class.active]="role === 'provider'">Prestador</span>
+        </div> -->
+
+        <h3>{{ userName }}</h3>
+        <h4>{{ userEmail }}</h4>
+      </div>
+
+      <!-- Balance -->
+      <div class="balance-background mt-3">
+        <a href="wallet.html" class="balance-details">
+          <h5 class="fw-medium">Saldo disponible :</h5>
+          <div class="d-flex align-items-center gap-1">
+            <h4>$0.00</h4>
+            <span class="material-symbols-rounded arrow-icon">arrow_forward</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Contenido según rol -->
+    <app-expert *ngIf="role === 'provider'"></app-expert>
+    <app-client *ngIf="role === 'client'"></app-client>
+  </div>
+</section>
+<!-- profile section end -->

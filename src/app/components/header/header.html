@@ -1,5 +1,10 @@
 <!-- header start -->
-<header class="header" [hidden]="hideHeader || router.url === '/login'" >
+<header class="header" [hidden]="
+hideHeader || 
+router.url === '/login' || 
+router.url === '/register' || 
+router.url === '/scanner' || 
+router.url === '/profile'" >
     <div class="custom-container">
         <div class="head-content">
             <a href="home.html#sidebar" class="sidebar-btn" data-bs-toggle="offcanvas">
@@ -28,10 +33,10 @@
         </div>
     </div>
   </header>
-  <header class="auth-header" [hidden]="router.url !== '/login'">
+  <header class="auth-header" [hidden]="router.url !== '/login' && router.url !== '/register'">
       <div class="custom-container">
           <div class="header-panel pb-3">
-              <a onclick="history.back();">
+              <a [routerLink]="['/home']" >
                   <i class="iconsax icon-btn" data-icon="chevron-left"> </i>
               </a>
   

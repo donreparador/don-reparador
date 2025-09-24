@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
-import { AuthPocketbaseService } from '@app/services/auth-pocketbase.service';
-
 import Swal from 'sweetalert2';
+import { AuthPocketbaseService } from '@app/services/auth-pocketbase.service';
 import { Router } from '@angular/router';
-
-
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-expert',
   imports: [],
-  templateUrl: './sidebar.html',
-  styleUrl: './sidebar.scss'
+  templateUrl: './expert.html',
+  styleUrl: './expert.scss'
 })
-export class Sidebar {
+export class Expert {
   constructor(private authService: AuthPocketbaseService, private router: Router) {}
-  async logout() {
+async logout() {
     const result = await Swal.fire({
       title: '¿Cerrar sesión?',
       text: 'Vas a salir de Don Reparador.',
@@ -22,7 +19,8 @@ export class Sidebar {
       confirmButtonText: 'Sí, salir',
       cancelButtonText: 'Cancelar',
       reverseButtons: true,
-      focusCancel: true,   customClass: {
+      focusCancel: true,
+      customClass: {
         popup: 'dr-swal',              // opcional
         confirmButton: 'dr-confirm',   // <-- clase propia
         cancelButton: 'dr-cancel',     // <-- clase propia
@@ -50,8 +48,5 @@ export class Sidebar {
         text: (e as any)?.message ?? 'Intenta de nuevo.',
       });
     }
-  }
-  isLogged() {
-    return this.authService.currentUser() !== null;
   }
 }

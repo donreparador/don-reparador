@@ -1,7 +1,7 @@
 <!-- bottom navbar start -->
 <div class="navbar-menu" [hidden]="hideHeader || router.url === '/login'">
     <ul>
-        <li class="active">
+        <li [class.active]="isActive('/')">
             <a routerLink="">
                 <div class="icon">
                     <img class="unactive" src="assets/images/svg/home.svg" alt="home">
@@ -11,18 +11,18 @@
             </a>
         </li>
   
-        <li>
-            <a href="booking.html">
+        <li [class.active]="isActive('/bookings')">
+            <a >
                 <div class="icon">
                     <img class="unactive" src="assets/images/svg/booking.svg" alt="booking">
                     <img class="active" src="assets/images/svg/booking-fill.svg" alt="booking">
                 </div>
-                <h5>Reservas</h5>
+                <h5>Solicitudes</h5>
             </a>
         </li>
   
-        <li>
-            <a href="cart.html" class="scanner-btn">
+        <li [class.active]="isActive('/scanner')">
+            <a class="scanner-btn">
                 <div class="icon">
                     <!-- <i class="iconsax icon-btn" data-icon="search"></i> -->
                     <i data-icon="search-normal-2" class="iconsax icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,8 +34,8 @@
             </a>
         </li>
   
-        <li>
-            <a href="offer.html">
+        <li [class.active]="isActive('/notifications')">
+            <a routerLink="/notifications" >
                 <div class="icon">
                   <i data-icon="bell-2" class=" notification-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 10.5214C11.59 10.5214 11.25 10.1814 11.25 9.77141V6.44141C11.25 6.03141 11.59 5.69141 12 5.69141C12.41 5.69141 12.75 6.03141 12.75 6.44141V9.77141C12.75 10.1914 12.41 10.5214 12 10.5214Z" fill="#292D32"></path>
@@ -48,7 +48,7 @@
             </a>
         </li>
   
-        <li>
+        <li [class.active]="isActive('/profile')">
             <a routerLink="/profile">
                 <div class="icon">
                     <img class="unactive" src="assets/images/svg/profile.svg" alt="profile">
