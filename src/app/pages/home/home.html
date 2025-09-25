@@ -2,88 +2,15 @@
 
   
 
-<app-banner-carousel></app-banner-carousel>
-<app-top-categories></app-top-categories>
-<app-featured-services></app-featured-services>
-<app-packages></app-packages>
+<app-banner-carousel *appFeatureFlag="'bannerCarousel'"></app-banner-carousel>
+<app-top-categories *appFeatureFlag="'topCategories'"></app-top-categories>
+<app-featured-services *appFeatureFlag="'featuredServices'"></app-featured-services>
+<app-packages *appFeatureFlag="'packages'"></app-packages>
+<app-features-experts *appFeatureFlag="'featuredExperts'"></app-features-experts>
 
 
 
-
-  <section class="section-b-space box-background">
-    <div class="custom-container">
-        <div class="title">
-            <h2>Expertos recomendados</h2>
-            <a href="expert-servicer.html">Ver todos    </a>
-        </div>
-  
-        <ul class="servicer-list">
-            <li class="servicer-box">
-                <div class="servicer-profile">
-                    <img class="profile-img" src="assets/images/profile/profile.png" alt="p11">
-                </div>
-                <div class="servicer-details">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a href="servicemen-details.html">
-                            <h4 class="fw-medium title-color">Leslie Alexander</h4>
-                        </a>
-                        <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg"
-                                alt="star">
-                            4.2</h6>
-                    </div>
-                    <h6 class="fw-normal title-color">Painting Service</h6>
-  
-                    <div class="location">
-                        <i class="iconsax icon" data-icon="location"></i>
-                        <h6> Santa Ana, New York</h6>
-                    </div>
-                </div>
-            </li>
-            <li class="servicer-box">
-                <div class="servicer-profile">
-                    <img class="profile-img" src="assets/images/profile/p10.png" alt="p11">
-                </div>
-                <div class="servicer-details">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a href="servicemen-details.html">
-                            <h4 class="fw-medium title-color">Esther Howard</h4>
-                        </a>
-                        <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg"
-                                alt="star">
-                            4.0</h6>
-                    </div>
-                    <h6 class="fw-normal title-color">Cleaning, Plumber, Electronics Service</h6>
-  
-                    <div class="location">
-                        <i class="iconsax icon" data-icon="location"></i>
-                        <h6> Allentown, New Mexico </h6>
-                    </div>
-                </div>
-            </li>
-            <li class="servicer-box">
-                <div class="servicer-profile">
-                    <img class="profile-img" src="assets/images/profile/p9.png" alt="p11">
-                </div>
-                <div class="servicer-details">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a href="servicemen-details.html">
-                            <h4 class="fw-medium title-color">Guy Hawkins</h4>
-                        </a>
-                        <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg"
-                                alt="star">
-                            3.8</h6>
-                    </div>
-                    <h6 class="fw-normal title-color">Salon Service</h6>
-  
-                    <div class="location">
-                        <i class="iconsax icon" data-icon="location"></i>
-                        <h6> Mesa, New Jersey</h6>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-  </section> 
+ 
   <!-- expert servicer section end--> 
   <!-- blog section starts -->
   <!-- <section class="section-b-space">

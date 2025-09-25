@@ -6,6 +6,7 @@ import { Header } from './components/header/header';
 import { Sidebar } from './components/sidebar/sidebar';
 import { filter } from 'rxjs/operators';
 import { NavigationEnd } from '@angular/router';
+import { ConfigMobileService } from './core/config-mobile.service';
 declare const iconsax: any;
 @Component({
   selector: 'app-root',
@@ -23,7 +24,11 @@ declare const iconsax: any;
 export class App implements AfterViewInit {
   hideHeader = false;
   
-  constructor(public router: Router) {
+  constructor(public router: Router,private cfg: ConfigMobileService) {
+    this.cfg.load();
+// app.component.ts
+
+
     this.router.events.subscribe(() => {
       this.hideHeader = this.router.url === '/register';
     });

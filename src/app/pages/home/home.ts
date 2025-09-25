@@ -11,21 +11,27 @@ import { Provider } from '../../interfaces/provider.interface';
 import { SeoService } from '../../services/seo.service';
 import { FeaturedServices } from './sections/featured-services/featured-services';
 import { Packages } from './sections/packages/packages';
+import { FeatureFlagDirective } from '@app/core/feature-flag.directive';
+import { ConfigMobileService } from '@app/core/config-mobile.service';
+import { FeaturesExperts } from "./sections/features-experts/features-experts";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, 
-    BannerCarousel, 
-    TopCategories, 
+  imports: [CommonModule,
+    BannerCarousel,
+    TopCategories,
     FeaturedServices,
     Packages,
-    // TopProviders
-  ],
+    FeatureFlagDirective, 
+    FeaturesExperts],
   templateUrl:   './home.html',
   // styleUrls: ['./home.component.scss'] 
 })    
 export class HomeComponent implements OnInit {
+  constructor(public cfg: ConfigMobileService){
+    this.cfg.load();
+  }
   private seo = inject(SeoService);
 
   banners: BannerItem[] = [
